@@ -1,25 +1,15 @@
 REST Countries
 =======
 
-Get information about countries via a RESTful API https://restcountries.eu
+- Usa python3 para bajar info y montar la BBDD
+- debes correr python3 updater.py para actualizar la info
+- countries-input.json es la madre de todo. Si este archivo no existe o está vacio, no se crawlea nada.
+- countries-input.json es la base de datos real.. todo gira alrededor de este archivo.
+- Este servicio java carga el JSON y lo parsea a cada peticion :\
 
-[![Build Status](https://travis-ci.org/fayder/restcountries.svg?branch=master)](https://travis-ci.org/fayder/restcountries)
 
-Donate!
----------------
-**570€ per year** aprox. is the cost to maintain and update REST Countries. Please help me cover these costs so I can keep improving this service.
 
-[donate]
-
-### 2017 costs funded: 6.14%
-
-Stay up-to-date
----------------
-Follow RESTCountries on [Twitter]
-
-Or subscribe to the [mailing list]
-
-API Endpoints
+(Convertir a SpringBoot) API Endpoints
 =======
 
 Below are described the REST endpoints available that you can use to search for countries
