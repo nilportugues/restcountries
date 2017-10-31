@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import urllib2
+import urllib
 
 URL_POPULATION = 'https://en.wikipedia.org/wiki/List_of_countries_by_population'
 
@@ -18,7 +18,7 @@ def __extractPopulationData(html):
             for j, column in enumerate(row):
                 if j == 3:
                     href = column.find('a')
-                    country = href.get_text().encode('utf-8')
+                    country = href.get_text()
                 if j == 5:
                     population = column.get_text().replace(',', '')
                     populationData[country] = population
@@ -29,14 +29,14 @@ def __extractPopulationData(html):
 def __updateJSON(countriesJSON, populationData):
     for country in populationData:
         for countryJSON in countriesJSON:
-            if country == countryJSON['name'].encode('utf-8'):
+            if country == countryJSON['name']:
                 countryJSON['population'] = int(populationData[country])
 
     return countriesJSON
 
 
 def __getHTML(url):
-    usock = urllib2.urlopen(url)
+    usock = urllib.request.urlopen(url)
     data = usock.read()
     usock.close()
     return data

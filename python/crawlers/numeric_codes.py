@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
-import urllib2
+import urllib
 
 URL_ISO_COUNTRIES = 'https://en.wikipedia.org/wiki/ISO_3166-1'
 
@@ -13,7 +13,7 @@ def update(countriesJSON):
 
 
 def __getHTML(url):
-    usock = urllib2.urlopen(url)
+    usock = urllib.request.urlopen(url)
     data = usock.read()
     usock.close()
     return data
@@ -24,7 +24,7 @@ def __extractData(html):
     for row in table:
         nameLink = row.find('a')
         if nameLink != -1:
-            countryName = nameLink.get_text().encode('utf-8')
+            countryName = nameLink.get_text()
         for idx,element in enumerate(row):
             if idx == 7:
                 numericCode = element.text
@@ -35,7 +35,7 @@ def __extractData(html):
 def __updateJSON(countriesJSON, data):
     for country in data:
         for countryJSON in countriesJSON:
-            if country == countryJSON['name'].encode('utf-8'):
+            if country == countryJSON['name']:
                 countryJSON['numericCode'] = data[country]
 
     return countriesJSON

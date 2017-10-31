@@ -22,7 +22,7 @@ def __extractCurrencyData(html):
                 country = {}
                 country["currencies"] = []
                 country["country"] = __extractCountryName(columns[0])
-                currencyName = columns[1].find('a').text.encode('utf-8')
+                currencyName = columns[1].find('a').text
                 currencySymbol = __extractCurrencySymbol(columns[2])
                 currencyCode = __extractCurrencyCode(columns[3])
                 currency = {"name": currencyName, "symbol": currencySymbol, "code": currencyCode}
@@ -40,21 +40,21 @@ def __extractCurrencyData(html):
 def __extractCountryName(html):
     links = html.find_all('a')
     if len(links) == 1:
-        return links[0]['title'].encode('utf-8')
+        return links[0]['title']
     elif len(links) == 2 and 'cite' not in links[1]['href']:
-        return links[1].text.encode('utf-8')
+        return links[1].text
     else:
-        return links[0]['title'].encode('utf-8')
+        return links[0]['title']
 
 
 def __extractCurrencyName(html):
     link = html.find('a')
     spans = html.find_all('span')
     if link and 'cite' not in link['href']:
-        return link.text.encode('utf-8')
+        return link.text
     elif len(spans) > 0:
         if spans[1].text and '(none)' not in spans[1].text:
-            return spans[1].text.encode('utf-8')
+            return spans[1].text
         else:
             return None
     else:
@@ -67,7 +67,7 @@ def __extractCurrencySymbol(html):
         if html.find('a'):
             return None
         else:
-            currencySymbol = html.text.encode('utf-8')
+            currencySymbol = html.text
             if 'or' in currencySymbol:
                 currencySymbol = currencySymbol.split('or')[0].strip()
             return currencySymbol
@@ -79,12 +79,12 @@ def __extractCurrencyCode(html):
     if html.find('span'):
         return None
     else:
-        return html.text.encode('utf-8')
+        return html.text
 
 
 def __updateJSON(countriesJSON, countries):
     for country in countries:
         for countryJSON in countriesJSON:
-            if country['country'] == countryJSON['name'].encode('utf-8'):
+            if country['country'] == countryJSON['name']:
                 countryJSON['currencies'] = country['currencies']
     return countriesJSON

@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import urllib2
+import urllib
 
 URL_GINI = 'https://en.wikipedia.org/wiki/List_of_countries_by_income_equality'
 
@@ -20,7 +20,7 @@ def __extractGiniData(html):
                 if j == 1:
                     href = column.find('a')
                     if href is not None:
-                        country = href.get_text().encode('utf-8')
+                        country = href.get_text()
                 if j == 7:
                     gini = column.get_text()
                     giniData[country] = gini
@@ -31,7 +31,7 @@ def __extractGiniData(html):
 def __updateJSON(countriesJSON, giniData):
     for country in giniData:
         for countryJSON in countriesJSON:
-            if country == countryJSON['name'].encode('utf-8'):
+            if country == countryJSON['name']:
                 if giniData[country]:
                     countryJSON['gini'] = float(giniData[country])
 
@@ -39,7 +39,7 @@ def __updateJSON(countriesJSON, giniData):
 
 
 def __getHTML(url):
-    usock = urllib2.urlopen(url)
+    usock = urllib.request.urlopen(url)
     data = usock.read()
     usock.close()
     return data

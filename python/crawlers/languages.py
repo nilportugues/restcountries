@@ -21,14 +21,14 @@ def __extractLanguagesData(html):
             columns = row.find_all('td')
             language['name'] = __extractLanguageName(columns[2])
             language['nativeName'] = __extractLanguageName(columns[3])
-            language['iso639_1'] = columns[4].text.encode('utf-8')
-            language['iso639_2'] = columns[5].text.encode('utf-8')
+            language['iso639_1'] = columns[4].text
+            language['iso639_2'] = columns[5].text
             languages.append(language)
     return languages
 
 
 def __extractLanguageName(html):
-    text = html.text.encode('utf-8')
+    text = ""+html.text
     return text.split(",")[0].strip()
 
 
