@@ -1,11 +1,15 @@
 REST Countries
 =======
 
-- Usa python3 para bajar info y montar la BBDD
-- debes correr python3 updater.py para actualizar la info
-- countries-input.json es la madre de todo. Si este archivo no existe o está vacio, no se crawlea nada.
+**Que es, que tiene**
 - countries-input.json es la base de datos real.. todo gira alrededor de este archivo.
 - Este servicio java carga el JSON y lo parsea a cada peticion :\
+
+**Actualización de datos**
+- countries-input.json es la madre de todo. Si este archivo no existe o está vacio, no se crawlea nada.
+   - Usa python3 para bajar info y montar la BBDD
+   - debes correr python3 updater.py para actualizar la info
+
 
 
 
